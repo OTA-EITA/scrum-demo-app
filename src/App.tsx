@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 interface Task {
@@ -20,9 +20,18 @@ function App() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks)
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [draggedTask, setDraggedTask] = useState<Task | null>(null)
+  const [showDataLostWarning, setShowDataLostWarning] = useState(false)
+
+  useEffect(() => {
+    const hasVisited = sessionStorage.getItem('hasVisited')
+    if (hasVisited) {
+      setShowDataLostWarning(true)
+    } else {
+      sessionStorage.setItem('hasVisited', 'true')
+    }
+  }, [])
 
   const addTask = () => {
-    if (!newTaskTitle.trim()) return
     const newTask: Task = {
       id: Date.now(),
       title: newTaskTitle,
@@ -77,6 +86,12 @@ function App() {
 
   return (
     <div className="app">
+      {showDataLostWarning && (
+        <div className="data-lost-warning">
+          ⚠️ ページをリロードしたため、追加したデータが消えました
+          <button onClick={() => setShowDataLostWarning(false)}>×</button>
+        </div>
+      )}
       <header className="header">
         <h1 className="title">
           <span className="title-icon">⚡</span>
