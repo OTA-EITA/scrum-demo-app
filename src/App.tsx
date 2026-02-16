@@ -22,6 +22,7 @@ function App() {
     return saved ? JSON.parse(saved) : initialTasks
   })
   const [newTaskTitle, setNewTaskTitle] = useState('')
+  const [newTaskPriority, setNewTaskPriority] = useState<Task['priority']>('medium')
   const [draggedTask, setDraggedTask] = useState<Task | null>(null)
 
   useEffect(() => {
@@ -34,7 +35,7 @@ function App() {
       id: Date.now(),
       title: newTaskTitle,
       status: 'todo',
-      priority: 'medium',
+      priority: newTaskPriority,
     }
     setTasks([...tasks, newTask])
     setNewTaskTitle('')
@@ -101,6 +102,15 @@ function App() {
           placeholder="新しいタスクを追加..."
           className="task-input"
         />
+        <select
+          value={newTaskPriority}
+          onChange={(e) => setNewTaskPriority(e.target.value as Task['priority'])}
+          className="priority-select"
+        >
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
         <button onClick={addTask} className="add-button" disabled={!newTaskTitle.trim()}>
           追加
         </button>
