@@ -17,19 +17,16 @@ const initialTasks: Task[] = [
 ]
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks)
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    const saved = localStorage.getItem('sprint-board-tasks')
+    return saved ? JSON.parse(saved) : initialTasks
+  })
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [draggedTask, setDraggedTask] = useState<Task | null>(null)
-  const [showDataLostWarning, setShowDataLostWarning] = useState(false)
 
   useEffect(() => {
-    const hasVisited = sessionStorage.getItem('hasVisited')
-    if (hasVisited) {
-      setShowDataLostWarning(true)
-    } else {
-      sessionStorage.setItem('hasVisited', 'true')
-    }
-  }, [])
+    localStorage.setItem('sprint-board-tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   const addTask = () => {
     const newTask: Task = {
@@ -86,12 +83,6 @@ function App() {
 
   return (
     <div className="app">
-      {showDataLostWarning && (
-        <div className="data-lost-warning">
-          ⚠️ ページをリロードしたため、追加したデータが消えました
-          <button onClick={() => setShowDataLostWarning(false)}>×</button>
-        </div>
-      )}
       <header className="header">
         <h1 className="title">
           <span className="title-icon">⚡</span>
