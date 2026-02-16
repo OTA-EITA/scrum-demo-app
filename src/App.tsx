@@ -149,6 +149,7 @@ function App() {
                         <button
                           className="action-btn back-btn"
                           onClick={() => moveTask(task.id, column.status === 'done' ? 'doing' : 'todo')}
+                          title="前のステータスに戻す"
                         >
                           ←
                         </button>
@@ -157,6 +158,7 @@ function App() {
                         <button
                           className="action-btn complete-btn"
                           onClick={() => moveTask(task.id, column.status === 'todo' ? 'doing' : 'done')}
+                          title="次のステータスに移動"
                         >
                           →
                         </button>
@@ -164,6 +166,7 @@ function App() {
                       <button
                         className="action-btn delete-btn"
                         onClick={() => deleteTask(task.id)}
+                        title="タスクを削除"
                       >
                         ×
                       </button>
