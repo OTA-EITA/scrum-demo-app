@@ -94,6 +94,12 @@ function App() {
         <p className="subtitle">チームのタスクを可視化しよう</p>
       </header>
 
+      <div className="priority-legend">
+        <span className="legend-item"><span className="legend-dot" style={{ backgroundColor: '#ff6b6b' }} />High</span>
+        <span className="legend-item"><span className="legend-dot" style={{ backgroundColor: '#ffd93d' }} />Medium</span>
+        <span className="legend-item"><span className="legend-dot" style={{ backgroundColor: '#6bcb77' }} />Low</span>
+      </div>
+
       <div className="add-task-container">
         <input
           type="text"
