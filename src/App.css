@@ -89,6 +89,13 @@
   transform: translateY(0);
 }
 
+.add-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 /* Board */
 .board {
   display: grid;

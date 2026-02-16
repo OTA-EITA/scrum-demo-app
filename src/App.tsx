@@ -29,6 +29,7 @@ function App() {
   }, [tasks])
 
   const addTask = () => {
+    if (!newTaskTitle.trim()) return
     const newTask: Task = {
       id: Date.now(),
       title: newTaskTitle,
@@ -100,7 +101,7 @@ function App() {
           placeholder="新しいタスクを追加..."
           className="task-input"
         />
-        <button onClick={addTask} className="add-button">
+        <button onClick={addTask} className="add-button" disabled={!newTaskTitle.trim()}>
           追加
         </button>
       </div>
