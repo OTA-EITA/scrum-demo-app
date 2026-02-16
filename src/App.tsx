@@ -145,6 +145,14 @@ function App() {
                   <div className="task-content">
                     <p className="task-title">{task.title}</p>
                     <div className="task-actions">
+                      {column.status !== 'todo' && (
+                        <button
+                          className="action-btn back-btn"
+                          onClick={() => moveTask(task.id, column.status === 'done' ? 'doing' : 'todo')}
+                        >
+                          ←
+                        </button>
+                      )}
                       {column.status !== 'done' && (
                         <button
                           className="action-btn complete-btn"
