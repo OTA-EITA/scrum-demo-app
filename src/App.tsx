@@ -48,6 +48,7 @@ function App() {
   }
 
   const deleteTask = (taskId: number) => {
+    if (!window.confirm('このタスクを削除しますか？')) return
     setTasks(tasks.filter(task => task.id !== taskId))
   }
 
