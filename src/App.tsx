@@ -47,6 +47,15 @@ function App() {
     ))
   }
 
+  const cyclePriority = (taskId: number) => {
+    const order: Task['priority'][] = ['high', 'medium', 'low']
+    setTasks(tasks.map(task => {
+      if (task.id !== taskId) return task
+      const nextIndex = (order.indexOf(task.priority) + 1) % order.length
+      return { ...task, priority: order[nextIndex] }
+    }))
+  }
+
   const deleteTask = (taskId: number) => {
     if (!window.confirm('このタスクを削除しますか？')) return
     setTasks(tasks.filter(task => task.id !== taskId))
@@ -147,6 +156,8 @@ function App() {
                   <div
                     className="priority-indicator"
                     style={{ backgroundColor: getPriorityColor(task.priority) }}
+                    onClick={() => cyclePriority(task.id)}
+                    title="クリックで優先度を変更"
                   />
                   <div className="task-content">
                     <p className="task-title">{task.title}</p>
