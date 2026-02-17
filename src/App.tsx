@@ -24,6 +24,8 @@ function App() {
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [newTaskPriority, setNewTaskPriority] = useState<Task['priority']>('medium')
   const [draggedTask, setDraggedTask] = useState<Task | null>(null)
+  const [editingTaskId, setEditingTaskId] = useState<number | null>(null)
+  const [editingTitle, setEditingTitle] = useState('')
 
   useEffect(() => {
     localStorage.setItem('sprint-board-tasks', JSON.stringify(tasks))
@@ -45,6 +47,21 @@ function App() {
     setTasks(tasks.map(task =>
       task.id === taskId ? { ...task, status: newStatus } : task
     ))
+  }
+
+  const startEditing = (task: Task) => {
+    setEditingTaskId(task.id)
+    setEditingTitle(task.title)
+  }
+
+  const saveEdit = () => {
+    if (editingTaskId === null) return
+    if (editingTitle.trim()) {
+      setTasks(tasks.map(task =>
+        task.id === editingTaskId ? { ...task, title: editingTitle.trim() } : task
+      ))
+    }
+    setEditingTaskId(null)
   }
 
   const cyclePriority = (taskId: number) => {
@@ -160,7 +177,18 @@ function App() {
                     title="クリックで優先度を変更"
                   />
                   <div className="task-content">
-                    <p className="task-title">{task.title}</p>
+                    {editingTaskId === task.id ? (
+                      <input
+                        className="edit-input"
+                        value={editingTitle}
+                        onChange={(e) => setEditingTitle(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === 'Enter') saveEdit(); if (e.key === 'Escape') setEditingTaskId(null); }}
+                        onBlur={saveEdit}
+                        autoFocus
+                      />
+                    ) : (
+                      <p className="task-title" onDoubleClick={() => startEditing(task)}>{task.title}</p>
+                    )}
                     <div className="task-actions">
                       {column.status !== 'todo' && (
                         <button
