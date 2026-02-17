@@ -7,6 +7,7 @@ interface Task {
   status: 'todo' | 'doing' | 'done'
   priority: 'high' | 'medium' | 'low'
   dueDate?: string
+  assignee?: string
 }
 
 const initialTasks: Task[] = [
@@ -79,6 +80,15 @@ function App() {
       ))
     }
     setEditingTaskId(null)
+  }
+
+  const setAssignee = (taskId: number) => {
+    const name = window.prompt('担当者名を入力してください')
+    if (name === null) return
+    saveHistory()
+    setTasks(tasks.map(task =>
+      task.id === taskId ? { ...task, assignee: name || undefined } : task
+    ))
   }
 
   const cyclePriority = (taskId: number) => {
@@ -213,6 +223,13 @@ function App() {
                     title="クリックで優先度を変更"
                   />
                   <div className="task-content">
+                    <span
+                      className="assignee-badge"
+                      onClick={() => setAssignee(task.id)}
+                      title="クリックで担当者を変更"
+                    >
+                      👤 {task.assignee || '未割当'}
+                    </span>
                     {task.dueDate && (
                       <span className={`due-date ${new Date(task.dueDate) < new Date() && task.status !== 'done' ? 'overdue' : ''}`}>
                         📅 {task.dueDate}
