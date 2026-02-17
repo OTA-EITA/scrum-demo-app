@@ -356,6 +356,22 @@
   transform: scale(1.1);
 }
 
+.task-comment {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.comment-btn {
+  background: rgba(148, 163, 184, 0.3);
+  color: #94a3b8;
+}
+
+.comment-btn:hover {
+  background: rgba(148, 163, 184, 0.5);
+  transform: scale(1.1);
+}
+
 .delete-btn {
   background: rgba(255, 107, 107, 0.3);
   color: #ff6b6b;

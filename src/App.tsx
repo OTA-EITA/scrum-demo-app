@@ -8,6 +8,7 @@ interface Task {
   priority: 'high' | 'medium' | 'low'
   dueDate?: string
   assignee?: string
+  comment?: string
 }
 
 const initialTasks: Task[] = [
@@ -80,6 +81,16 @@ function App() {
       ))
     }
     setEditingTaskId(null)
+  }
+
+  const setComment = (taskId: number) => {
+    const task = tasks.find(t => t.id === taskId)
+    const comment = window.prompt('コメントを入力してください', task?.comment || '')
+    if (comment === null) return
+    saveHistory()
+    setTasks(tasks.map(t =>
+      t.id === taskId ? { ...t, comment: comment || undefined } : t
+    ))
   }
 
   const setAssignee = (taskId: number) => {
@@ -247,6 +258,9 @@ function App() {
                     ) : (
                       <p className="task-title" onDoubleClick={() => startEditing(task)}>{task.title}</p>
                     )}
+                    {task.comment && (
+                      <p className="task-comment">💬 {task.comment}</p>
+                    )}
                     <div className="task-actions">
                       {column.status !== 'todo' && (
                         <button
@@ -266,6 +280,13 @@ function App() {
                           →
                         </button>
                       )}
+                      <button
+                        className="action-btn comment-btn"
+                        onClick={() => setComment(task.id)}
+                        title="コメントを追加"
+                      >
+                        💬
+                      </button>
                       <button
                         className="action-btn delete-btn"
                         onClick={() => deleteTask(task.id)}
