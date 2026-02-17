@@ -6,6 +6,7 @@ interface Task {
   title: string
   status: 'todo' | 'doing' | 'done'
   priority: 'high' | 'medium' | 'low'
+  dueDate?: string
 }
 
 const initialTasks: Task[] = [
@@ -23,6 +24,7 @@ function App() {
   })
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [newTaskPriority, setNewTaskPriority] = useState<Task['priority']>('medium')
+  const [newTaskDueDate, setNewTaskDueDate] = useState('')
   const [draggedTask, setDraggedTask] = useState<Task | null>(null)
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null)
   const [editingTitle, setEditingTitle] = useState('')
@@ -38,9 +40,11 @@ function App() {
       title: newTaskTitle,
       status: 'todo',
       priority: newTaskPriority,
+      dueDate: newTaskDueDate || undefined,
     }
     setTasks([...tasks, newTask])
     setNewTaskTitle('')
+    setNewTaskDueDate('')
   }
 
   const moveTask = (taskId: number, newStatus: Task['status']) => {
@@ -144,6 +148,12 @@ function App() {
           <option value="medium">Medium</option>
           <option value="low">Low</option>
         </select>
+        <input
+          type="date"
+          value={newTaskDueDate}
+          onChange={(e) => setNewTaskDueDate(e.target.value)}
+          className="date-input"
+        />
         <button onClick={addTask} className="add-button" disabled={!newTaskTitle.trim()}>
           追加
         </button>
@@ -178,6 +188,11 @@ function App() {
                     title="クリックで優先度を変更"
                   />
                   <div className="task-content">
+                    {task.dueDate && (
+                      <span className={`due-date ${new Date(task.dueDate) < new Date() && task.status !== 'done' ? 'overdue' : ''}`}>
+                        📅 {task.dueDate}
+                      </span>
+                    )}
                     {editingTaskId === task.id ? (
                       <input
                         className="edit-input"
