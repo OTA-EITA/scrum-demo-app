@@ -166,9 +166,10 @@ function App() {
               {getTasksByStatus(column.status).map(task => (
                 <div
                   key={task.id}
-                  className="task-card"
+                  className={`task-card ${draggedTask?.id === task.id ? 'dragging' : ''}`}
                   draggable
                   onDragStart={() => handleDragStart(task)}
+                  onDragEnd={() => setDraggedTask(null)}
                 >
                   <div
                     className="priority-indicator"

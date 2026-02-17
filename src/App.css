@@ -372,8 +372,10 @@
 }
 
 /* Drag states */
-.task-card[draggable="true"]:active {
-  opacity: 0.8;
+.task-card.dragging {
+  opacity: 0.3;
+  transform: scale(0.95);
+  border: 2px dashed rgba(96, 165, 250, 0.5);
 }
 
 /* Data Lost Warning */
