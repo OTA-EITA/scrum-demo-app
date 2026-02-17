@@ -28,6 +28,18 @@ function App() {
   const [draggedTask, setDraggedTask] = useState<Task | null>(null)
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null)
   const [editingTitle, setEditingTitle] = useState('')
+  const [taskHistory, setTaskHistory] = useState<Task[][]>([])
+
+  const saveHistory = () => {
+    setTaskHistory(prev => [...prev.slice(-19), tasks])
+  }
+
+  const undo = () => {
+    if (taskHistory.length === 0) return
+    const previous = taskHistory[taskHistory.length - 1]
+    setTaskHistory(prev => prev.slice(0, -1))
+    setTasks(previous)
+  }
 
   useEffect(() => {
     localStorage.setItem('sprint-board-tasks', JSON.stringify(tasks))
@@ -48,6 +60,7 @@ function App() {
   }
 
   const moveTask = (taskId: number, newStatus: Task['status']) => {
+    saveHistory()
     setTasks(tasks.map(task =>
       task.id === taskId ? { ...task, status: newStatus } : task
     ))
@@ -69,6 +82,7 @@ function App() {
   }
 
   const cyclePriority = (taskId: number) => {
+    saveHistory()
     const order: Task['priority'][] = ['high', 'medium', 'low']
     setTasks(tasks.map(task => {
       if (task.id !== taskId) return task
@@ -79,6 +93,7 @@ function App() {
 
   const deleteTask = (taskId: number) => {
     if (!window.confirm('このタスクを削除しますか？')) return
+    saveHistory()
     setTasks(tasks.filter(task => task.id !== taskId))
   }
 
@@ -127,6 +142,12 @@ function App() {
         </h1>
         <p className="subtitle">チームのタスクを可視化しよう</p>
       </header>
+
+      {taskHistory.length > 0 && (
+        <div className="undo-bar">
+          <button onClick={undo} className="undo-btn">↩ 元に戻す</button>
+        </div>
+      )}
 
       <div className="priority-legend">
         <span className="legend-item"><span className="legend-dot" style={{ backgroundColor: '#ff6b6b' }} />High</span>

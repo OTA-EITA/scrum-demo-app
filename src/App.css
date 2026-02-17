@@ -37,6 +37,28 @@
   font-size: 1.1rem;
 }
 
+/* Undo Bar */
+.undo-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.undo-btn {
+  background: rgba(96, 165, 250, 0.2);
+  border: 1px solid rgba(96, 165, 250, 0.4);
+  color: #60a5fa;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.undo-btn:hover {
+  background: rgba(96, 165, 250, 0.4);
+}
+
 /* Priority Legend */
 .priority-legend {
   display: flex;
