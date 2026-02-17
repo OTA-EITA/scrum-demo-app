@@ -97,8 +97,12 @@ function App() {
     }
   }
 
+  const priorityOrder = { high: 0, medium: 1, low: 2 }
+
   const getTasksByStatus = (status: Task['status']) =>
-    tasks.filter(task => task.status === status)
+    tasks
+      .filter(task => task.status === status)
+      .sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority])
 
   const getPriorityColor = (priority: Task['priority']) => {
     switch (priority) {
