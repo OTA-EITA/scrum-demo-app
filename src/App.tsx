@@ -28,6 +28,7 @@ function App() {
   const [newTaskPriority, setNewTaskPriority] = useState<Task['priority']>('medium')
   const [newTaskDueDate, setNewTaskDueDate] = useState('')
   const [draggedTask, setDraggedTask] = useState<Task | null>(null)
+  const [selectedTaskIds, setSelectedTaskIds] = useState<Set<number>>(new Set())
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null)
   const [editingTitle, setEditingTitle] = useState('')
   const [taskHistory, setTaskHistory] = useState<Task[][]>([])
@@ -81,6 +82,24 @@ function App() {
       ))
     }
     setEditingTaskId(null)
+  }
+
+  const toggleSelectTask = (taskId: number) => {
+    setSelectedTaskIds(prev => {
+      const next = new Set(prev)
+      if (next.has(taskId)) next.delete(taskId)
+      else next.add(taskId)
+      return next
+    })
+  }
+
+  const bulkMove = (newStatus: Task['status']) => {
+    if (selectedTaskIds.size === 0) return
+    saveHistory()
+    setTasks(tasks.map(task =>
+      selectedTaskIds.has(task.id) ? { ...task, status: newStatus } : task
+    ))
+    setSelectedTaskIds(new Set())
   }
 
   const setComment = (taskId: number) => {
@@ -205,6 +224,16 @@ function App() {
         </button>
       </div>
 
+      {selectedTaskIds.size > 0 && (
+        <div className="bulk-action-bar">
+          <span className="bulk-count">{selectedTaskIds.size}件選択中</span>
+          <button className="bulk-btn bulk-todo" onClick={() => bulkMove('todo')}>📋 To Do</button>
+          <button className="bulk-btn bulk-doing" onClick={() => bulkMove('doing')}>🚀 Doing</button>
+          <button className="bulk-btn bulk-done" onClick={() => bulkMove('done')}>✅ Done</button>
+          <button className="bulk-btn bulk-cancel" onClick={() => setSelectedTaskIds(new Set())}>✕ 解除</button>
+        </div>
+      )}
+
       <div className="board">
         {columns.map(column => (
           <div
@@ -227,6 +256,12 @@ function App() {
                   onDragStart={() => handleDragStart(task)}
                   onDragEnd={() => setDraggedTask(null)}
                 >
+                  <input
+                    type="checkbox"
+                    className="task-checkbox"
+                    checked={selectedTaskIds.has(task.id)}
+                    onChange={() => toggleSelectTask(task.id)}
+                  />
                   <div
                     className="priority-indicator"
                     style={{ backgroundColor: getPriorityColor(task.priority) }}
