@@ -383,6 +383,457 @@
   transform: scale(1.1);
 }
 
+/* Navigation */
+.nav-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  animation: fadeInDown 0.6s ease-out 0.1s both;
+}
+
+.nav-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.nav-active {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Page Content */
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.page-title {
+  color: #fff;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.empty-message {
+  color: #64748b;
+  text-align: center;
+  font-style: italic;
+  padding: 2rem;
+}
+
+/* Scrum Guide */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+
+.guide-section-title {
+  grid-column: 1 / -1;
+  color: #60a5fa;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(96, 165, 250, 0.3);
+}
+
+.guide-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.guide-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.guide-card h3 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 0.7rem;
+}
+
+.guide-card p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.event-card {
+  border-left: 3px solid #60a5fa;
+}
+
+/* Review Feedback */
+.review-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.review-input {
+  width: 140px;
+}
+
+.review-content-input {
+  width: 350px;
+}
+
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.feedback-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+.fb-type {
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.fb-type-感想 { background: rgba(96, 165, 250, 0.3); color: #60a5fa; }
+.fb-type-要望 { background: rgba(251, 191, 36, 0.3); color: #fbbf24; }
+.fb-type-改善 { background: rgba(107, 203, 119, 0.3); color: #6bcb77; }
+.fb-type-バグ { background: rgba(255, 107, 107, 0.3); color: #ff6b6b; }
+
+.fb-author {
+  color: #60a5fa;
+  font-weight: 600;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  min-width: 60px;
+}
+
+.fb-content {
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+/* Planning Poker */
+.poker-topic {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.poker-topic-input {
+  width: 500px;
+  max-width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.poker-add-player {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.poker-players {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+}
+
+.poker-player-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.poker-player-name {
+  color: #60a5fa;
+  font-weight: 700;
+  min-width: 80px;
+  font-size: 0.95rem;
+}
+
+.poker-cards {
+  display: flex;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.poker-card {
+  width: 42px;
+  height: 56px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.poker-card:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: #3b82f6;
+  transform: translateY(-4px);
+}
+
+.poker-card-selected {
+  background: #3b82f6;
+  border-color: #60a5fa;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+}
+
+.poker-card:disabled {
+  cursor: default;
+}
+
+.poker-vote-display {
+  min-width: 40px;
+  text-align: center;
+}
+
+.poker-revealed-point {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fbbf24;
+}
+
+.poker-hidden {
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+.poker-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.poker-reset-btn {
+  background: linear-gradient(135deg, #64748b, #475569);
+}
+
+.poker-result {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* KPT Retrospective */
+.kpt-author-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.kpt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.kpt-column {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 1.2rem;
+  min-height: 300px;
+  border-top: 4px solid;
+}
+
+.kpt-column-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.kpt-input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.kpt-input {
+  flex: 1;
+  width: auto;
+}
+
+.kpt-add-btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+}
+
+.kpt-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.kpt-sticky {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.7rem;
+  border-left: 3px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  position: relative;
+  animation: slideIn 0.3s ease-out;
+}
+
+.kpt-sticky-author {
+  font-size: 0.75rem;
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+.kpt-sticky-text {
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.kpt-delete {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.kpt-sticky:hover .kpt-delete {
+  opacity: 1;
+}
+
+.kpt-delete:hover {
+  color: #ff6b6b;
+}
+
+/* Sprint History */
+.history-timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.history-sprint {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 1.5rem;
+  border-left: 4px solid #3b82f6;
+}
+
+.history-sprint-title {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.history-goal {
+  color: #60a5fa;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.history-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.history-before {
+  color: #94a3b8;
+  flex: 1;
+}
+
+.history-arrow {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.history-after {
+  color: #6bcb77;
+  flex: 1;
+}
+
+.history-summary {
+  color: #60a5fa;
+  font-weight: 600;
+  text-align: right;
+  font-size: 0.9rem;
+}
+
 /* Footer */
 .footer {
   text-align: center;
@@ -606,5 +1057,47 @@
 
   .task-actions {
     opacity: 1;
+  }
+
+  .nav-bar {
+    gap: 0.3rem;
+  }
+
+  .nav-btn {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kpt-board {
+    grid-template-columns: 1fr;
+  }
+
+  .review-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .review-input,
+  .review-content-input {
+    width: 100%;
+  }
+
+  .poker-cards {
+    flex-wrap: wrap;
+  }
+
+  .poker-card {
+    width: 36px;
+    height: 48px;
+    font-size: 0.9rem;
+  }
+
+  .history-item {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
