@@ -93,8 +93,8 @@ describe('ボード - タスク操作', () => {
     const moveButtons = screen.getAllByTitle('次のステータスに移動')
     await userEvent.click(moveButtons[0])
     // Task moved from todo to doing - count should change
-    const todoColumn = screen.getByText('To Do').closest('.column')!
-    const doingColumn = screen.getByText('Doing').closest('.column')!
+    const todoColumn = screen.getByText('To Do').closest('.column') as HTMLElement
+    const doingColumn = screen.getByText('Doing').closest('.column') as HTMLElement
     expect(within(todoColumn).getAllByTitle('タスクを削除').length).toBeLessThanOrEqual(
       within(doingColumn).getAllByTitle('タスクを削除').length
     )
